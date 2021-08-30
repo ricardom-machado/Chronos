@@ -1,0 +1,82 @@
+﻿@model Techjur.Models.DER.Acao
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section themesjs {
+    <script type="text/javascript" src="~/assets/js/core/libraries/jasny_bootstrap.min.js"></script>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+            <div class="d-flex">
+                <div class="breadcrumb">
+                    <a href="/Acao" class="breadcrumb-item"><i class="icon-list mr-2"></i> Acervo</a>
+                    <a href="/Acao/New" class="breadcrumb-item"><i class="icon-add mr-2"></i> Novo</a>
+                    <a href="/Acao/Peticionar/@Model.id" class="breadcrumb-item"><i class="icon-magazine mr-2"></i> Pedido / Petição</a>
+                    <a href="/AcaoMovimento/Details/@Model.id" class="breadcrumb-item"><i class="icon-git-compare mr-2"></i> Acompanhamento</a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a href="#basic-tab1" class="nav-link active" data-toggle="tab">Informações</a></li>
+                    <li class="nav-item"><a href="#basic-tab2" class="nav-link" data-toggle="tab">Partes</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="basic-tab1">
+                        <fieldset class="content-group">
+                            @Html.Partial("_form")
+                        </fieldset>
+                    </div>
+
+                    <div class="tab-pane fade" id="basic-tab2">
+                        <form class="form-horizontal" id="form-documento" action="/Pessoa/Search" method="post" data-ajax="true" data-ajax-success="parte.ajax_success" data-ajax-failure="parte.ajax_failure">
+                            <div class="panel-heading">
+                                <div class="heading-elements">
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-primary">Adicionar<i class="icon-arrow-right14 position-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <fieldset class="content-group">
+                                    @Html.Partial("_Partes")
+                                </fieldset>
+                            </div>
+                        </form>
+                        <form class="form-horizontal" data-ajax="true" data-ajax-success="indexDelete.ajax_success" data-ajax-failure="indexDelete.ajax_failure" data-ajax-confirm="Deseja realmente deletar?" action="/AcaoParte/Delete" method="post">
+                            <table class="table datatable-show-all dataTable no-footer" id="table_departamento" role="grid" aria-describedby="DataTables_Table_0_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">Nome</th>
+                                        <th style="width: 10px;" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">
+                                            <input type="submit" class="btn bg-danger-800" value="Deletar" />
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.acaoParteList)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td>@item.Pessoa.nome</td>
+                                            <td class="text-center">
+                                                <input id="id" name="id" class="styled" type="checkbox" value="@item.id" />
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

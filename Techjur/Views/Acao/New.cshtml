@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section themesjs {
+    <script type="text/javascript" src="~/assets/js/core/libraries/jasny_bootstrap.min.js"></script>
+}
+<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+    <div class="d-flex">
+        <div class="breadcrumb">
+            <a href="/Acao" class="breadcrumb-item"><i class="icon-list mr-2"></i> Acervo</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <form class="form-horizontal" method="post">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Novo cadastro<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+                    <div class="heading-elements">
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Cadastrar<i class="icon-arrow-right14 position-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <fieldset class="content-group">
+                        @Html.Partial("_form")
+                    </fieldset>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Cadastrar<i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

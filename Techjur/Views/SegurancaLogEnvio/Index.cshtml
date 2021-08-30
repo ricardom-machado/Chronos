@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
+                <div class="datatable-scroll">
+                    <form action="/@ViewContext.RouteData.GetRequiredString("controller")/Delete" method="post" data-ajax="true" data-ajax-confirm="Deseja realmente excluir?"
+                          data-ajax-success="indexDelete.ajax_success"
+                          data-ajax-failure="indexDelete.ajax_failure">
+                        <table class="table datatable-show-all dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <thead>
+                                <tr role="row">
+                                    <th style="width: 10px;" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">Usuário</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">Ocorrência</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">Hash do Documento</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">Número Processo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr role="row" class="odd">
+                                        <td><a href="/@ViewContext.RouteData.GetRequiredString("controller")/Edit/@item.id"><i class="icon-pencil7"></i></a></td>
+                                        <td class="sorting_1">@item.SegurancaUsuario.nome</td>
+                                        <td class="sorting_1">@String.Format("{0:dd/MM/yyyy HH:mm}", item.ocorrencia)</td>
+                                        <td class="sorting_1">@(BitConverter.ToString(item.AcaoMovimentoDocumento.hash))</td>
+                                        <td class="sorting_1">@item.AcaoMovimentoDocumento.AcaoMovimento.numeroProcesso</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
